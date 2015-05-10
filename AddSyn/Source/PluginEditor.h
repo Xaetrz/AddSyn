@@ -22,7 +22,10 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
-#include "PluginProcessor.h"
+//#include "PluginProcessor.h"
+class AddSynAudioProcessor;
+enum Tab;
+enum WaveType;
 //[/Headers]
 
 
@@ -36,7 +39,9 @@
                                                                     //[/Comments]
 */
 class AddSynAudioProcessorEditor  : public AudioProcessorEditor,
-                                    public Timer
+                                    public Timer,
+                                    public SliderListener,
+                                    public ButtonListener
 {
 public:
     //==============================================================================
@@ -45,21 +50,60 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
+		AddSynAudioProcessor* getProcessor();
 		void timerCallback();
-		AddSynAudioProcessor* getProcessor() const
-		{return static_cast <AddSynAudioProcessor*>(getAudioProcessor());}
+		void MoveNextInstrument(bool forward);
+		void ResetGUI(Tab tab);
+		void setWaveTypeGUI(WaveType wt);
+		Tab getCurrentTab();
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
+    void sliderValueChanged (Slider* sliderThatWasMoved);
+    void buttonClicked (Button* buttonThatWasClicked);
 
 
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+	int currPos = 0;
+	Tab currTab;
     //[/UserVariables]
 
     //==============================================================================
+    ScopedPointer<TabbedComponent> uxTabs;
+    ScopedPointer<Slider> uxSlider1;
+    ScopedPointer<Slider> uxSlider2;
+    ScopedPointer<Slider> uxSlider3;
+    ScopedPointer<Slider> uxSlider4;
+    ScopedPointer<Slider> uxSlider5;
+    ScopedPointer<Slider> uxSlider6;
+    ScopedPointer<Slider> uxSlider7;
+    ScopedPointer<Slider> uxSlider8;
+    ScopedPointer<Slider> uxSlider9;
+    ScopedPointer<Slider> uxSlider10;
+    ScopedPointer<Slider> uxSlider11;
+    ScopedPointer<Slider> uxSlider12;
+    ScopedPointer<TextButton> uxLeftButton;
+    ScopedPointer<TextEditor> uxName;
+    ScopedPointer<TextButton> uxRightButton;
+    ScopedPointer<TextButton> uxCreateInstrument;
+    ScopedPointer<TextButton> uxDestroyInstrument;
+    ScopedPointer<ToggleButton> uxSineButton;
+    ScopedPointer<ToggleButton> uxTriangleButton;
+    ScopedPointer<ToggleButton> uxSquareButton;
+    ScopedPointer<ToggleButton> uxSawButton;
+    ScopedPointer<Slider> uxAttackSlider;
+    ScopedPointer<Slider> uxReleaseSlider;
+    ScopedPointer<Label> label;
+    ScopedPointer<Label> label2;
+    ScopedPointer<Slider> uxSustainSlider;
+    ScopedPointer<Label> label3;
+    ScopedPointer<ToggleButton> uxSustainButton;
+    ScopedPointer<TextButton> uxLeftButton2;
+    ScopedPointer<TextButton> uxRightButton2;
+    ScopedPointer<Component> midiKeyboard;
 
 
     //==============================================================================

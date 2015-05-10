@@ -51,6 +51,10 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/AudioSignalGenerator_fb1d685e.o \
+  $(OBJDIR)/EnvelopeGenerator_532874c4.o \
+  $(OBJDIR)/Oscillator_8a6cfe29.o \
+  $(OBJDIR)/AddSynthesizer_b5f04630.o \
   $(OBJDIR)/PluginProcessor_a059e380.o \
   $(OBJDIR)/PluginEditor_94d4fb09.o \
   $(OBJDIR)/juce_audio_basics_181b4cb.o \
@@ -86,6 +90,26 @@ clean:
 strip:
 	@echo Stripping AddSyn
 	-@strip --strip-unneeded $(OUTDIR)/$(TARGET)
+
+$(OBJDIR)/AudioSignalGenerator_fb1d685e.o: ../../Source/AudioSignalGenerator.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling AudioSignalGenerator.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/EnvelopeGenerator_532874c4.o: ../../Source/EnvelopeGenerator.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling EnvelopeGenerator.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Oscillator_8a6cfe29.o: ../../Source/Oscillator.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Oscillator.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/AddSynthesizer_b5f04630.o: ../../Source/AddSynthesizer.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling AddSynthesizer.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PluginProcessor_a059e380.o: ../../Source/PluginProcessor.cpp
 	-@mkdir -p $(OBJDIR)

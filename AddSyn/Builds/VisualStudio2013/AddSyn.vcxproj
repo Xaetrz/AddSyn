@@ -139,6 +139,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\AudioSignalGenerator.cpp"/>
+    <ClCompile Include="..\..\Source\EnvelopeGenerator.cpp"/>
+    <ClCompile Include="..\..\Source\Oscillator.cpp"/>
+    <ClCompile Include="..\..\Source\AddSynthesizer.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.cpp">
@@ -1261,6 +1265,10 @@
     <ClCompile Include="..\..\..\JUCE\modules\juce_audio_plugin_client\VST3\juce_VST3_Wrapper.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\AudioSignalGenerator.h"/>
+    <ClInclude Include="..\..\Source\EnvelopeGenerator.h"/>
+    <ClInclude Include="..\..\Source\Oscillator.h"/>
+    <ClInclude Include="..\..\Source\AddSynthesizer.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
     <ClInclude Include="..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>

@@ -8,6 +8,9 @@
     <Filter Include="AddSyn\Source">
       <UniqueIdentifier>{791EB27E-3FF9-8EF8-305D-D94D28C4079A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AddSyn\Source\SynComponents">
+      <UniqueIdentifier>{148C9DD9-7DC4-A489-E97C-068E5D808DF5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Juce Modules">
       <UniqueIdentifier>{422C46B7-0467-2DB0-BF3C-16DFCAFD69AC}</UniqueIdentifier>
     </Filter>
@@ -322,6 +325,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\AudioSignalGenerator.cpp">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\EnvelopeGenerator.cpp">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Oscillator.cpp">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\AddSynthesizer.cpp">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>AddSyn\Source</Filter>
     </ClCompile>
@@ -1572,6 +1587,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\AudioSignalGenerator.h">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\EnvelopeGenerator.h">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Oscillator.h">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\AddSynthesizer.h">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>AddSyn\Source</Filter>
     </ClInclude>

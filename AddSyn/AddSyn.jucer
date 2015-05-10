@@ -11,6 +11,22 @@
               pluginAAXCategory="AAX_ePlugInCategory_Dynamics" jucerVersion="3.1.0">
   <MAINGROUP id="jvZ0HI" name="AddSyn">
     <GROUP id="{02741235-E32D-9EF9-EE67-5D93756B1E58}" name="Source">
+      <GROUP id="{63BF0A7B-E90C-8576-473F-5F8C9B8F77E1}" name="SynComponents">
+        <FILE id="kDBmut" name="AudioSignalGenerator.h" compile="0" resource="0"
+              file="Source/AudioSignalGenerator.h"/>
+        <FILE id="KK0oSt" name="AudioSignalGenerator.cpp" compile="1" resource="0"
+              file="Source/AudioSignalGenerator.cpp"/>
+        <FILE id="HO7tV8" name="EnvelopeGenerator.h" compile="0" resource="0"
+              file="Source/EnvelopeGenerator.h"/>
+        <FILE id="cxSz7X" name="EnvelopeGenerator.cpp" compile="1" resource="0"
+              file="Source/EnvelopeGenerator.cpp"/>
+        <FILE id="bdrtBK" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
+        <FILE id="gcbzjE" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
+        <FILE id="TZtuCM" name="AddSynthesizer.h" compile="0" resource="0"
+              file="Source/AddSynthesizer.h"/>
+        <FILE id="pYGKhG" name="AddSynthesizer.cpp" compile="1" resource="0"
+              file="Source/AddSynthesizer.cpp"/>
+      </GROUP>
       <FILE id="PHRlO3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="hUJYle" name="PluginProcessor.h" compile="0" resource="0"

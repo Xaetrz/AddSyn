@@ -12,11 +12,53 @@
 #define PLUGINPROCESSOR_H_INCLUDED
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
+#include "AddSynthesizer.h"
 
 //==============================================================================
 /**
 */
+struct Levels 
+{
+	double attackValues[12];
+	double sustainValues[12];
+	double releaseValues[12];
+	double attackRate;
+	double sustainRate;
+	double releaseRate;
+	bool isSustain;
+	bool isActive;
+
+	Levels() 
+	{
+		for (int i = 0; i < 12; i++)
+		{
+			attackValues[i] = 5.f;
+			sustainValues[i] = 5.f;
+			releaseValues[i] = 5.f;
+		}
+
+		attackRate = 5.f;
+		sustainRate = 5.f;
+		releaseRate = 5.f;
+		isSustain = true;
+		isActive = false;
+	}
+};
+
+enum Tab {
+	Attack,
+	Sustain,
+	Release
+};
+
+enum WaveType
+{
+	Sine,
+	Square,
+	Triangle,
+	Sawtooth
+};
+
 class AddSynAudioProcessor  : public AudioProcessor
 {
 public:
@@ -65,8 +107,29 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+	void setLevels(int instrumentIndex, int levelIndex, Tab tab, double value);
+	void setRates(int instrumentIndex, Tab rateType, double value);
+	void setWaveType(int instrumentIndex, WaveType wt);
+	void setSustain(int instrumentIndex, bool isSustain);
+	void setActive(int instrumentIndex, bool isActive);
+	const Levels& getLevels(int instrumentIndex);
+	WaveType getWaveType(int instrumentIndex);
+
+	// this is kept up to date with the midi messages that arrive, and the UI component
+	// registers with it so it can represent the incoming messages
+	MidiKeyboardState keyboardState;
+
+	// these are used to persist the UI's size - the values are stored along with the
+	// filter's other parameters, and the UI component will update them when it gets
+	// resized.
+	int lastUIWidth, lastUIHeight;
+
+	Levels* levels;
+	WaveType* wavetypes;
+
 private:
     //==============================================================================
+	AddSynthesizer* synth;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AddSynAudioProcessor)
 };
 
