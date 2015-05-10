@@ -13,14 +13,25 @@
 
 #include "Oscillator.h"
 #include "EnvelopeGenerator.h"
+#include "EnvelopeType.h"
 
 class AudioSignalGenerator
 {
 public:
-
+	AudioSignalGenerator();
+	~AudioSignalGenerator();
+	void setLevels(int levelIndex, EnvelopeType envType, double value);
+	void setRates(EnvelopeType envType, double value);
+	void setWaveType(WaveType wt);
+	void setSustain(bool isSustain);
+	void setActive(bool isActive);
+	const Levels& getLevels();
+	WaveType getWaveType();
+	bool getActive();
 private:
     Oscillator* oscill;
     EnvelopeGenerator* envGen;
+	bool isActive;
 };
 
 

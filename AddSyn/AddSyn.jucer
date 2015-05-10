@@ -12,6 +12,9 @@
   <MAINGROUP id="jvZ0HI" name="AddSyn">
     <GROUP id="{02741235-E32D-9EF9-EE67-5D93756B1E58}" name="Source">
       <GROUP id="{63BF0A7B-E90C-8576-473F-5F8C9B8F77E1}" name="SynComponents">
+        <FILE id="lz4aC7" name="Levels.h" compile="0" resource="0" file="Source/Levels.h"/>
+        <FILE id="hpPxFv" name="WaveType.h" compile="0" resource="0" file="Source/WaveType.h"/>
+        <FILE id="uKvRL3" name="EnvelopeType.h" compile="0" resource="0" file="Source/EnvelopeType.h"/>
         <FILE id="kDBmut" name="AudioSignalGenerator.h" compile="0" resource="0"
               file="Source/AudioSignalGenerator.h"/>
         <FILE id="KK0oSt" name="AudioSignalGenerator.cpp" compile="1" resource="0"
@@ -60,6 +63,7 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <VS2013 targetFolder="Builds/VisualStudio2013" vstFolder="c:\SDKs\VST3 SDK"
@@ -85,6 +89,7 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </VS2013>
     <VS2012 targetFolder="Builds/VisualStudio2012" vstFolder="c:\SDKs\VST3 SDK"
@@ -110,6 +115,7 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </VS2012>
     <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="~/SDKs/VST3 SDK" vst3Folder="~/SDKs/VST3 SDK">
@@ -134,6 +140,7 @@
         <MODULEPATH id="juce_audio_formats" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_processors" path="../JUCE/modules"/>
         <MODULEPATH id="juce_audio_plugin_client" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JUCE/modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
@@ -143,6 +150,7 @@
     <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
     <MODULES id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"/>
     <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_utils" showAllCode="1" useLocalCopy="0"/>
     <MODULES id="juce_core" showAllCode="1" useLocalCopy="0"/>
     <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
     <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>

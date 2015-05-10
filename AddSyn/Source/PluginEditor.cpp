@@ -208,7 +208,7 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     uxRightButton2->setButtonText (TRANS("Load"));
     uxRightButton2->addListener (this);
 
-    addAndMakeVisible (midiKeyboard = new Component());
+    addAndMakeVisible (midiKeyboard = new MidiKeyboardComponent (ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard));
     midiKeyboard->setName ("MIDI Keyboard");
 
 
@@ -221,6 +221,7 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     //[Constructor] You can add your own custom stuff here..
 		startTimer(200); //starts timer with interval of 200ms
 		currTab = Attack;
+		ResetGUI(Attack);
     //[/Constructor]
 }
 
@@ -323,102 +324,100 @@ void AddSynAudioProcessorEditor::resized()
 void AddSynAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
-	AddSynAudioProcessor* proc = getProcessor();
-	Tab tab;
-
-	tab = getCurrentTab();
+	AddSynthesizer synth = getProcessor()->getSynth();
+	EnvelopeType envType = getCurrentTab();
 
     //[/UsersliderValueChanged_Pre]
 
     if (sliderThatWasMoved == uxSlider1)
     {
         //[UserSliderCode_uxSlider1] -- add your slider handling code here..
-		proc->setLevels(currPos, 0, tab, uxSlider1->getValue());
+		synth.setLevels(currPos, 0, envType, uxSlider1->getValue());
 		//uxName->setText(juce::String(proc->getLevels(currPos).attackValues[0]));
         //[/UserSliderCode_uxSlider1]
     }
     else if (sliderThatWasMoved == uxSlider2)
     {
         //[UserSliderCode_uxSlider2] -- add your slider handling code here..
-		proc->setLevels(currPos, 1, tab, uxSlider2->getValue());
+		synth.setLevels(currPos, 1, envType, uxSlider2->getValue());
         //[/UserSliderCode_uxSlider2]
     }
     else if (sliderThatWasMoved == uxSlider3)
     {
         //[UserSliderCode_uxSlider3] -- add your slider handling code here..
-		proc->setLevels(currPos, 2, tab, uxSlider3->getValue());
+		synth.setLevels(currPos, 2, envType, uxSlider3->getValue());
         //[/UserSliderCode_uxSlider3]
     }
     else if (sliderThatWasMoved == uxSlider4)
     {
         //[UserSliderCode_uxSlider4] -- add your slider handling code here..
-		proc->setLevels(currPos, 3, tab, uxSlider4->getValue());
+		synth.setLevels(currPos, 3, envType, uxSlider4->getValue());
         //[/UserSliderCode_uxSlider4]
     }
     else if (sliderThatWasMoved == uxSlider5)
     {
         //[UserSliderCode_uxSlider5] -- add your slider handling code here..
-		proc->setLevels(currPos, 4, tab, uxSlider5->getValue());
+		synth.setLevels(currPos, 4, envType, uxSlider5->getValue());
         //[/UserSliderCode_uxSlider5]
     }
     else if (sliderThatWasMoved == uxSlider6)
     {
         //[UserSliderCode_uxSlider6] -- add your slider handling code here..
-		proc->setLevels(currPos, 5, tab, uxSlider6->getValue());
+		synth.setLevels(currPos, 5, envType, uxSlider6->getValue());
         //[/UserSliderCode_uxSlider6]
     }
     else if (sliderThatWasMoved == uxSlider7)
     {
         //[UserSliderCode_uxSlider7] -- add your slider handling code here..
-		proc->setLevels(currPos, 6, tab, uxSlider7->getValue());
+		synth.setLevels(currPos, 6, envType, uxSlider7->getValue());
         //[/UserSliderCode_uxSlider7]
     }
     else if (sliderThatWasMoved == uxSlider8)
     {
         //[UserSliderCode_uxSlider8] -- add your slider handling code here..
-		proc->setLevels(currPos, 7, tab, uxSlider8->getValue());
+		synth.setLevels(currPos, 7, envType, uxSlider8->getValue());
         //[/UserSliderCode_uxSlider8]
     }
     else if (sliderThatWasMoved == uxSlider9)
     {
         //[UserSliderCode_uxSlider9] -- add your slider handling code here..
-		proc->setLevels(currPos, 8, tab, uxSlider9->getValue());
+		synth.setLevels(currPos, 8, envType, uxSlider9->getValue());
         //[/UserSliderCode_uxSlider9]
     }
     else if (sliderThatWasMoved == uxSlider10)
     {
         //[UserSliderCode_uxSlider10] -- add your slider handling code here..
-		proc->setLevels(currPos, 9, tab, uxSlider10->getValue());
+		synth.setLevels(currPos, 9, envType, uxSlider10->getValue());
         //[/UserSliderCode_uxSlider10]
     }
     else if (sliderThatWasMoved == uxSlider11)
     {
         //[UserSliderCode_uxSlider11] -- add your slider handling code here..
-		proc->setLevels(currPos, 10, tab, uxSlider11->getValue());
+		synth.setLevels(currPos, 10, envType, uxSlider11->getValue());
         //[/UserSliderCode_uxSlider11]
     }
     else if (sliderThatWasMoved == uxSlider12)
     {
         //[UserSliderCode_uxSlider12] -- add your slider handling code here..
-		proc->setLevels(currPos, 11, tab, uxSlider12->getValue());
+		synth.setLevels(currPos, 11, envType, uxSlider12->getValue());
         //[/UserSliderCode_uxSlider12]
     }
     else if (sliderThatWasMoved == uxAttackSlider)
     {
         //[UserSliderCode_uxAttackSlider] -- add your slider handling code here..
-		proc->setRates(currPos, Attack, uxAttackSlider->getValue());
+		synth.setRates(currPos, Attack, uxAttackSlider->getValue());
         //[/UserSliderCode_uxAttackSlider]
     }
     else if (sliderThatWasMoved == uxReleaseSlider)
     {
         //[UserSliderCode_uxReleaseSlider] -- add your slider handling code here..
-		proc->setRates(currPos, Release, uxReleaseSlider->getValue());
+		synth.setRates(currPos, Release, uxReleaseSlider->getValue());
         //[/UserSliderCode_uxReleaseSlider]
     }
     else if (sliderThatWasMoved == uxSustainSlider)
     {
         //[UserSliderCode_uxSustainSlider] -- add your slider handling code here..
-		proc->setRates(currPos, Sustain, uxSustainSlider->getValue());
+		synth.setRates(currPos, Sustain, uxSustainSlider->getValue());
         //[/UserSliderCode_uxSustainSlider]
     }
 
@@ -430,6 +429,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 {
     //[UserbuttonClicked_Pre]
 	AddSynAudioProcessor* proc = getProcessor();
+	AddSynthesizer synth = getProcessor()->getSynth();
     //[/UserbuttonClicked_Pre]
 
     if (buttonThatWasClicked == uxLeftButton)
@@ -450,10 +450,10 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 		for (int i = currPos + 1; i < currPos + 16; i++)
 		{
 			int currIndex = i % 16;
-			if (!proc->getLevels(currIndex).isActive)
+			if (!synth.getActive(currPos))
 			{
 				currPos = i;
-				proc->setActive(currPos, true);
+				synth.setActive(currPos, true);
 				break;
 			}
 		}
@@ -463,7 +463,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == uxDestroyInstrument)
     {
         //[UserButtonCode_uxDestroyInstrument] -- add your button handler code here..
-		proc->setActive(currPos, false);
+		synth.setActive(currPos, false);
 		MoveNextInstrument(false);
         //[/UserButtonCode_uxDestroyInstrument]
     }
@@ -471,34 +471,34 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_uxSineButton] -- add your button handler code here..
 		setWaveTypeGUI(Sine);
-		proc->setWaveType(currPos, Sine);
+		synth.setWaveType(currPos, Sine);
         //[/UserButtonCode_uxSineButton]
     }
     else if (buttonThatWasClicked == uxTriangleButton)
     {
         //[UserButtonCode_uxTriangleButton] -- add your button handler code here..
 		setWaveTypeGUI(Triangle);
-		proc->setWaveType(currPos, Triangle);
+		synth.setWaveType(currPos, Triangle);
         //[/UserButtonCode_uxTriangleButton]
     }
     else if (buttonThatWasClicked == uxSquareButton)
     {
         //[UserButtonCode_uxSquareButton] -- add your button handler code here..
 		setWaveTypeGUI(Square);
-		proc->setWaveType(currPos, Square);
+		synth.setWaveType(currPos, Square);
         //[/UserButtonCode_uxSquareButton]
     }
     else if (buttonThatWasClicked == uxSawButton)
     {
         //[UserButtonCode_uxSawButton] -- add your button handler code here..
 		setWaveTypeGUI(Sawtooth);
-		proc->setWaveType(currPos, Sawtooth);
+		synth.setWaveType(currPos, Sawtooth);
         //[/UserButtonCode_uxSawButton]
     }
     else if (buttonThatWasClicked == uxSustainButton)
     {
         //[UserButtonCode_uxSustainButton] -- add your button handler code here..
-		proc->setSustain(currPos, uxSustainButton->getToggleState());
+		synth.setSustain(currPos, uxSustainButton->getToggleState());
         //[/UserButtonCode_uxSustainButton]
     }
     else if (buttonThatWasClicked == uxLeftButton2)
@@ -540,14 +540,14 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 	// Move the currently displayed instrument GUI to next instrument
 	void AddSynAudioProcessorEditor::MoveNextInstrument(bool forward)
 	{
-		AddSynAudioProcessor* proc = getProcessor();
+		AddSynthesizer synth = getProcessor()->getSynth();
 
 		int firstForward = -1;
 		int firstBackward = -1;
 		for (int i = currPos + 1; i < currPos + 16; i++)
 		{
 			int currIndex = i % 16;
-			if (proc->getLevels(currIndex).isActive)
+			if (synth.getActive(currIndex))
 			{
 				if (firstForward == -1) firstForward = currIndex;
 				firstBackward = currIndex;
@@ -557,19 +557,19 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 		if (firstForward != -1 && forward) currPos = firstForward;
 		else if (firstBackward != -1 && !forward) currPos = firstBackward;
 
-		ResetGUI(Attack);
+		ResetGUI(currTab);
 	}
 
 	// Reset all of the GUI elements according to given tab and current instrument index
-	void AddSynAudioProcessorEditor::ResetGUI(Tab tab)
+	void AddSynAudioProcessorEditor::ResetGUI(EnvelopeType envType)
 	{
-		AddSynAudioProcessor* proc = getProcessor();
-		Levels levels = proc->getLevels(currPos);
-		WaveType wavetype = proc->getWaveType(currPos);
+		AddSynthesizer synth = getProcessor()->getSynth();
+		Levels levels = synth.getLevels(currPos);
+		WaveType wavetype = synth.getWaveType(currPos);
 
 		uxName->setText(juce::String(currPos));
 
-		if (tab == Attack)
+		if (envType == Attack)
 		{
 			uxSlider1->setValue(levels.attackValues[0]);
 			uxSlider2->setValue(levels.attackValues[1]);
@@ -584,7 +584,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 			uxSlider11->setValue(levels.attackValues[10]);
 			uxSlider12->setValue(levels.attackValues[11]);
 		}
-		else if (tab == Sustain)
+		else if (envType == Sustain)
 		{
 			uxSlider1->setValue(levels.sustainValues[0]);
 			uxSlider2->setValue(levels.sustainValues[1]);
@@ -599,7 +599,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 			uxSlider11->setValue(levels.sustainValues[10]);
 			uxSlider12->setValue(levels.sustainValues[11]);
 		}
-		else
+		else  // Release
 		{
 			uxSlider1->setValue(levels.releaseValues[0]);
 			uxSlider2->setValue(levels.releaseValues[1]);
@@ -649,7 +649,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 		}
 	}
 
-	Tab AddSynAudioProcessorEditor::getCurrentTab()
+	EnvelopeType AddSynAudioProcessorEditor::getCurrentTab()
 	{
 		if (uxTabs->getCurrentTabName() == "Attack") return Attack;
 		else if (uxTabs->getCurrentTabName() == "Sustain") return Sustain;
@@ -795,8 +795,8 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="384 8 48 24" buttonText="Load"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <GENERICCOMPONENT name="MIDI Keyboard" id="a2d2fd3359bafd05" memberName="midiKeyboard"
-                    virtualName="" explicitFocusOrder="0" pos="16 320 432 64" class="Component"
-                    params=""/>
+                    virtualName="" explicitFocusOrder="0" pos="16 320 432 64" class="MidiKeyboardComponent"
+                    params="ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

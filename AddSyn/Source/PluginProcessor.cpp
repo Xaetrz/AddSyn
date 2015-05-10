@@ -15,20 +15,12 @@
 //==============================================================================
 AddSynAudioProcessor::AddSynAudioProcessor()
 {
-	synth = new AddSynthesizer(levels);
-	levels = new Levels[16];
-	levels[0].isActive = true;
-
-	wavetypes = new WaveType[16];
-	for (int i = 0; i < 16; i++) 
-	{
-		wavetypes[i] = Sine;
-	}
+	synth = new AddSynthesizer();
 }
 
 AddSynAudioProcessor::~AddSynAudioProcessor()
 {
-	delete[] levels;
+	delete synth;
 }
 
 //==============================================================================
@@ -138,7 +130,7 @@ void AddSynAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-	synth->setCurrentPlaybackSampleRate(sampleRate);
+	synth->synth->setCurrentPlaybackSampleRate(sampleRate);
 	keyboardState.reset();
 }
 
@@ -169,7 +161,7 @@ void AddSynAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 	keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
 
 	// and now get the synth to process these midi events and generate its output.
-	synth->renderNextBlock(buffer, midiMessages, 0, numSamples);
+	synth->synth->renderNextBlock(buffer, midiMessages, 0, numSamples);
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
@@ -210,51 +202,6 @@ void AddSynAudioProcessor::setStateInformation (const void* data, int sizeInByte
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-}
-
-void AddSynAudioProcessor::setLevels(int instrumentIndex, int levelIndex, Tab tab, double value)
-{
-	if (tab == Attack)
-		levels[instrumentIndex].attackValues[levelIndex] = value;
-	else if (tab == Sustain)
-		levels[instrumentIndex].sustainValues[levelIndex] = value;
-	else
-		levels[instrumentIndex].releaseValues[levelIndex] = value;
-}
-
-void AddSynAudioProcessor::setRates(int instrumentIndex, Tab rateType, double value) 
-{
-	if (rateType == Attack)
-		levels[instrumentIndex].attackRate = value;
-	else if (rateType == Sustain)
-		levels[instrumentIndex].sustainRate = value;
-	else
-		levels[instrumentIndex].releaseRate = value;
-}
-
-void AddSynAudioProcessor::setWaveType(int instrumentIndex, WaveType wt)
-{
-	wavetypes[instrumentIndex] = wt;
-}
-
-void AddSynAudioProcessor::setSustain(int instrumentIndex, bool isSustain)
-{
-	levels[instrumentIndex].isSustain = isSustain;
-}
-
-void AddSynAudioProcessor::setActive(int instrumentIndex, bool isActive)
-{
-	levels[instrumentIndex].isActive = isActive;
-}
-
-const Levels& AddSynAudioProcessor::getLevels(int instrumentIndex)
-{
-	return levels[instrumentIndex];
-}
-
-WaveType AddSynAudioProcessor::getWaveType(int instrumentIndex)
-{
-	return wavetypes[instrumentIndex];
 }
 
 //==============================================================================

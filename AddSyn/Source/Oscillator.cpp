@@ -8,9 +8,30 @@
   ==============================================================================
 */
 
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "Oscillator.h"
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
+
+Oscillator::Oscillator()
+{
+	wavetype = Sine;
+}
+
+Oscillator::~Oscillator()
+{
+
+}
+
+void Oscillator::setWaveType(WaveType wt)
+{
+	wavetype = wt;
+}
+
+
+WaveType Oscillator::getWaveType()
+{
+	return wavetype;
+}
+
 
 class SineWaveSound : public SynthesiserSound
 {

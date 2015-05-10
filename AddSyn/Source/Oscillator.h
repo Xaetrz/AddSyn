@@ -11,11 +11,17 @@
 #ifndef OSCILLATOR_H_INCLUDED
 #define OSCILLATOR_H_INCLUDED
 
+#include "WaveType.h"
+
 class Oscillator
 {
-
+public:
+	Oscillator();
+	~Oscillator();
+	void setWaveType(WaveType wt);
+	WaveType getWaveType();
+private:
+	WaveType wavetype;
 };
-
-
 
 #endif  // OSCILLATOR_H_INCLUDED

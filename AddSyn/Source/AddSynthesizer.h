@@ -13,21 +13,27 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioSignalGenerator.h"
+#include "EnvelopeType.h"
 
-//#include "PluginProcessor.h"
-//#include "PluginEditor.h"
-struct Levels;
-
-
-class AddSynthesizer : public Synthesiser
+class AddSynthesizer //: public Synthesiser
 {
 public:
-	AddSynthesizer(Levels* levels);
+	AddSynthesizer();
 	~AddSynthesizer();
-private:
-    AudioSignalGenerator* generators;
-};
 
+	void setLevels(int instrumentIndex, int levelIndex, EnvelopeType envType, double value);
+	void setRates(int instrumentIndex, EnvelopeType envType, double value);
+	void setWaveType(int instrumentIndex, WaveType wt);
+	void setSustain(int instrumentIndex, bool isSustain);
+	void setActive(int instrumentIndex, bool isActive);
+	const Levels& getLevels(int instrumentIndex);
+	WaveType getWaveType(int instrumentIndex);
+	bool getActive(int instrumentIndex);
+	Synthesiser* synth;
+	
+private:
+	AudioSignalGenerator* gens;
+};
 
 
 #endif  // ADDSYNTHESIZER_H_INCLUDED

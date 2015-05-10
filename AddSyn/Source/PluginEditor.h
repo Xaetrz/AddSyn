@@ -22,7 +22,7 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "JuceHeader.h"
-//#include "PluginProcessor.h"
+#include "EnvelopeType.h"
 class AddSynAudioProcessor;
 enum Tab;
 enum WaveType;
@@ -53,9 +53,9 @@ public:
 		AddSynAudioProcessor* getProcessor();
 		void timerCallback();
 		void MoveNextInstrument(bool forward);
-		void ResetGUI(Tab tab);
+		void ResetGUI(EnvelopeType tab);
 		void setWaveTypeGUI(WaveType wt);
-		Tab getCurrentTab();
+		EnvelopeType getCurrentTab();
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -68,7 +68,7 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
 	int currPos = 0;
-	Tab currTab;
+	EnvelopeType currTab;
     //[/UserVariables]
 
     //==============================================================================
@@ -103,7 +103,7 @@ private:
     ScopedPointer<ToggleButton> uxSustainButton;
     ScopedPointer<TextButton> uxLeftButton2;
     ScopedPointer<TextButton> uxRightButton2;
-    ScopedPointer<Component> midiKeyboard;
+    ScopedPointer<MidiKeyboardComponent> midiKeyboard;
 
 
     //==============================================================================
