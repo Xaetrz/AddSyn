@@ -12,8 +12,8 @@
 
 AudioSignalGenerator::AudioSignalGenerator()
 {
-	oscill = new Oscillator();
 	envGen = new EnvelopeGenerator();
+	oscill = new Oscillator(envGen);
 	isActive = false;
 }
 
@@ -61,4 +61,9 @@ WaveType AudioSignalGenerator::getWaveType()
 bool AudioSignalGenerator::getActive()
 {
 	return isActive;
+}
+
+SynthesiserVoice& AudioSignalGenerator::getSynthVoice()
+{
+	return oscill->getSynthVoice();
 }

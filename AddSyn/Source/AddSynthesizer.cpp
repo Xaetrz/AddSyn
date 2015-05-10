@@ -9,6 +9,7 @@
 */
 
 #include "AddSynthesizer.h"
+#include "AddSynthSounds.h"
 
 AddSynthesizer::AddSynthesizer()
 {
@@ -20,6 +21,13 @@ AddSynthesizer::AddSynthesizer()
 	{
 		gens[i].setWaveType(Sine);
 	}
+
+	synth->addSound(new SineWaveSound());
+	synth->addSound(new TriangleWaveSound());
+	synth->addSound(new SquareWaveSound());
+	synth->addSound(new SawtoothWaveSound());
+
+	synth->addVoice(&gens[0].getSynthVoice());
 }
 
 AddSynthesizer::~AddSynthesizer()
@@ -40,6 +48,7 @@ void AddSynthesizer::setRates(int instrumentIndex, EnvelopeType envType, double 
 void AddSynthesizer::setWaveType(int instrumentIndex, WaveType wt)
 {
 	gens[instrumentIndex].setWaveType(wt);
+	//ResetSynth();
 }
 
 void AddSynthesizer::setSustain(int instrumentIndex, bool isSustain)
@@ -50,6 +59,7 @@ void AddSynthesizer::setSustain(int instrumentIndex, bool isSustain)
 void AddSynthesizer::setActive(int instrumentIndex, bool isActive)
 {
 	gens[instrumentIndex].setActive(isActive);
+	//ResetSynth();
 }
 
 const Levels& AddSynthesizer::getLevels(int instrumentIndex)
@@ -65,4 +75,16 @@ WaveType AddSynthesizer::getWaveType(int instrumentIndex)
 bool AddSynthesizer::getActive(int instrumentIndex)
 {
 	return gens[instrumentIndex].getActive();
+}
+
+void AddSynthesizer::ResetSynth()
+{
+	//synth->allNotesOff(0, true);
+	synth->clearVoices();
+
+	for (int i = 0; i < 16; i++)
+	{
+		if (gens[i].getActive())
+			synth->addVoice(&gens[i].getSynthVoice());
+	}
 }

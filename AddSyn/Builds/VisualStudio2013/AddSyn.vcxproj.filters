@@ -1617,6 +1617,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\AddSynthSounds.h">
+      <Filter>AddSyn\Source\SynComponents</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Levels.h">
       <Filter>AddSyn\Source\SynComponents</Filter>
     </ClInclude>

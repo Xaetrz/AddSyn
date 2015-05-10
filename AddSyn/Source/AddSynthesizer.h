@@ -33,6 +33,7 @@ public:
 	
 private:
 	AudioSignalGenerator* gens;
+	void ResetSynth();
 };
 
 

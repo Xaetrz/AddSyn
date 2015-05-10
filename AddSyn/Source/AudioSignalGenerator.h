@@ -11,6 +11,7 @@
 #ifndef AUDIOSIGNALGENERATOR_H_INCLUDED
 #define AUDIOSIGNALGENERATOR_H_INCLUDED
 
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "Oscillator.h"
 #include "EnvelopeGenerator.h"
 #include "EnvelopeType.h"
@@ -28,6 +29,7 @@ public:
 	const Levels& getLevels();
 	WaveType getWaveType();
 	bool getActive();
+	SynthesiserVoice& getSynthVoice();
 private:
     Oscillator* oscill;
     EnvelopeGenerator* envGen;

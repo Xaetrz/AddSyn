@@ -10,45 +10,17 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Oscillator.h"
-
-Oscillator::Oscillator()
-{
-	wavetype = Sine;
-}
-
-Oscillator::~Oscillator()
-{
-
-}
-
-void Oscillator::setWaveType(WaveType wt)
-{
-	wavetype = wt;
-}
-
-
-WaveType Oscillator::getWaveType()
-{
-	return wavetype;
-}
-
-
-class SineWaveSound : public SynthesiserSound
-{
-public:
-	SineWaveSound() {}
-
-	bool appliesToNote(int /*midiNoteNumber*/) override  { return true; }
-	bool appliesToChannel(int /*midiChannel*/) override  { return true; }
-};
+#include "AddSynthSounds.h"
+#include "EnvelopeGenerator.h"
 
 class SineWaveVoice : public SynthesiserVoice
 {
 public:
-	SineWaveVoice()
+	SineWaveVoice(const EnvelopeGenerator* eg)
 		: angleDelta(0.0),
 		tailOff(0.0)
 	{
+		envGen = eg;
 	}
 
 	bool canPlaySound(SynthesiserSound* sound) override
@@ -145,4 +117,33 @@ public:
 
 private:
 	double currentAngle, angleDelta, level, tailOff;
+	const EnvelopeGenerator* envGen;
 };
+
+Oscillator::Oscillator(const EnvelopeGenerator* envGen)
+{
+	wavetype = Sine;
+	synthVoice = new SineWaveVoice(envGen);
+}
+
+Oscillator::~Oscillator()
+{
+
+}
+
+void Oscillator::setWaveType(WaveType wt)
+{
+	wavetype = wt;
+
+	// Change synth voice!!!!!!!!!!!!
+}
+
+WaveType Oscillator::getWaveType()
+{
+	return wavetype;
+}
+
+SynthesiserVoice& Oscillator::getSynthVoice()
+{
+	return *synthVoice;
+}

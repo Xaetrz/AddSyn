@@ -12,16 +12,19 @@
 #define OSCILLATOR_H_INCLUDED
 
 #include "WaveType.h"
+class EnvelopeGenerator;
 
 class Oscillator
 {
 public:
-	Oscillator();
+	Oscillator(const EnvelopeGenerator* envGen);
 	~Oscillator();
 	void setWaveType(WaveType wt);
 	WaveType getWaveType();
+	SynthesiserVoice& getSynthVoice();
 private:
 	WaveType wavetype;
+	SynthesiserVoice* synthVoice;
 };
 
 #endif  // OSCILLATOR_H_INCLUDED
