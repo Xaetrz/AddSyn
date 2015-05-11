@@ -140,6 +140,7 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     addAndMakeVisible (uxSineButton = new ToggleButton ("uxSineButton"));
     uxSineButton->setButtonText (TRANS("Sine"));
     uxSineButton->addListener (this);
+    uxSineButton->setToggleState (true, dontSendNotification);
 
     addAndMakeVisible (uxTriangleButton = new ToggleButton ("uxTriangleButton"));
     uxTriangleButton->setButtonText (TRANS("Triangle"));
@@ -200,16 +201,16 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     uxSustainButton->addListener (this);
     uxSustainButton->setToggleState (true, dontSendNotification);
 
-    addAndMakeVisible (uxLeftButton2 = new TextButton ("uxLeftButton"));
-    uxLeftButton2->setButtonText (TRANS("Save"));
-    uxLeftButton2->addListener (this);
-
-    addAndMakeVisible (uxRightButton2 = new TextButton ("uxRightButton"));
-    uxRightButton2->setButtonText (TRANS("Load"));
-    uxRightButton2->addListener (this);
-
     addAndMakeVisible (midiKeyboard = new MidiKeyboardComponent (ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard));
     midiKeyboard->setName ("MIDI Keyboard");
+
+    addAndMakeVisible (uxSoloButton = new ToggleButton ("uxSoloButton"));
+    uxSoloButton->setButtonText (TRANS("Solo"));
+    uxSoloButton->addListener (this);
+
+    addAndMakeVisible (uxMuteButton = new ToggleButton ("uxSoloButton"));
+    uxMuteButton->setButtonText (TRANS("Mute"));
+    uxMuteButton->addListener (this);
 
 
     //[UserPreSize]
@@ -259,9 +260,9 @@ AddSynAudioProcessorEditor::~AddSynAudioProcessorEditor()
     uxSustainSlider = nullptr;
     label3 = nullptr;
     uxSustainButton = nullptr;
-    uxLeftButton2 = nullptr;
-    uxRightButton2 = nullptr;
     midiKeyboard = nullptr;
+    uxSoloButton = nullptr;
+    uxMuteButton = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -314,9 +315,9 @@ void AddSynAudioProcessorEditor::resized()
     uxSustainSlider->setBounds (304, 192, 64, 48);
     label3->setBounds (376, 200, 79, 24);
     uxSustainButton->setBounds (344, 248, 64, 24);
-    uxLeftButton2->setBounds (336, 8, 48, 24);
-    uxRightButton2->setBounds (384, 8, 48, 24);
     midiKeyboard->setBounds (16, 320, 432, 64);
+    uxSoloButton->setBounds (328, 8, 56, 24);
+    uxMuteButton->setBounds (384, 8, 56, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -501,15 +502,24 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 		synth.setSustain(currPos, uxSustainButton->getToggleState());
         //[/UserButtonCode_uxSustainButton]
     }
-    else if (buttonThatWasClicked == uxLeftButton2)
+    else if (buttonThatWasClicked == uxSoloButton)
     {
-        //[UserButtonCode_uxLeftButton2] -- add your button handler code here..
-        //[/UserButtonCode_uxLeftButton2]
+        //[UserButtonCode_uxSoloButton] -- add your button handler code here..
+		uxMuteButton->setToggleState(false, new NotificationType());
+		bool isSolo = uxSoloButton->getToggleState();
+		proc->muted[currPos] = false;
+		for (int i = 0; i < 16; i++)
+		{
+			if (i != currPos)
+				proc->muted[i] = isSolo;
+		}
+        //[/UserButtonCode_uxSoloButton]
     }
-    else if (buttonThatWasClicked == uxRightButton2)
+    else if (buttonThatWasClicked == uxMuteButton)
     {
-        //[UserButtonCode_uxRightButton2] -- add your button handler code here..
-        //[/UserButtonCode_uxRightButton2]
+        //[UserButtonCode_uxMuteButton] -- add your button handler code here..
+		proc->muted[currPos] = uxMuteButton->getToggleState();
+        //[/UserButtonCode_uxMuteButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -540,7 +550,18 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 	// Move the currently displayed instrument GUI to next instrument
 	void AddSynAudioProcessorEditor::MoveNextInstrument(bool forward)
 	{
-		AddSynthesizer synth = getProcessor()->getSynth();
+		AddSynAudioProcessor* proc = getProcessor();
+		AddSynthesizer synth = proc->getSynth();
+
+		// If solo, turn off all mutes
+		if (uxSoloButton->getToggleState())
+		{
+			uxSoloButton->setToggleState(false, new NotificationType());
+			for (int i = 0; i < 16; i++)
+			{
+				proc->muted[i] = false;
+			}
+		}
 
 		int firstForward = -1;
 		int firstBackward = -1;
@@ -619,6 +640,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 		uxReleaseSlider->setValue(levels.releaseRate);
 		uxSustainSlider->setValue(levels.sustainRate);
 		uxSustainButton->setToggleState(levels.isSustain, new NotificationType());
+		uxMuteButton->setToggleState(getProcessor()->muted[currPos], new NotificationType());
 
 		setWaveTypeGUI(wavetype);
 	}
@@ -748,7 +770,7 @@ BEGIN_JUCER_METADATA
               buttonText="x" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="uxSineButton" id="8714c20a01cd6bb6" memberName="uxSineButton"
                 virtualName="" explicitFocusOrder="0" pos="24 288 56 24" buttonText="Sine"
-                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
   <TOGGLEBUTTON name="uxTriangleButton" id="2d0c5343bc4a811d" memberName="uxTriangleButton"
                 virtualName="" explicitFocusOrder="0" pos="88 288 64 24" buttonText="Triangle"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
@@ -788,15 +810,15 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="uxSustainButton" id="140b6db1460d230e" memberName="uxSustainButton"
                 virtualName="" explicitFocusOrder="0" pos="344 248 64 24" buttonText="Sustain"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
-  <TEXTBUTTON name="uxLeftButton" id="4f647f6abde1fec6" memberName="uxLeftButton2"
-              virtualName="" explicitFocusOrder="0" pos="336 8 48 24" buttonText="Save"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="uxRightButton" id="5edea518d5f72e0b" memberName="uxRightButton2"
-              virtualName="" explicitFocusOrder="0" pos="384 8 48 24" buttonText="Load"
-              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <GENERICCOMPONENT name="MIDI Keyboard" id="a2d2fd3359bafd05" memberName="midiKeyboard"
                     virtualName="" explicitFocusOrder="0" pos="16 320 432 64" class="MidiKeyboardComponent"
                     params="ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard"/>
+  <TOGGLEBUTTON name="uxSoloButton" id="892bd3dd7d282e09" memberName="uxSoloButton"
+                virtualName="" explicitFocusOrder="0" pos="328 8 56 24" buttonText="Solo"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
+  <TOGGLEBUTTON name="uxSoloButton" id="2b390ac4b5c07878" memberName="uxMuteButton"
+                virtualName="" explicitFocusOrder="0" pos="384 8 56 24" buttonText="Mute"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

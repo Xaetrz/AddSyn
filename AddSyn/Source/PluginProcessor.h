@@ -72,6 +72,9 @@ public:
 	// registers with it so it can represent the incoming messages
 	MidiKeyboardState keyboardState;
 
+	// holds which audio signal generators are muted
+	bool* muted;
+
 	// these are used to persist the UI's size - the values are stored along with the
 	// filter's other parameters, and the UI component will update them when it gets
 	// resized.

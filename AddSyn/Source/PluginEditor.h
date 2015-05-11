@@ -101,9 +101,9 @@ private:
     ScopedPointer<Slider> uxSustainSlider;
     ScopedPointer<Label> label3;
     ScopedPointer<ToggleButton> uxSustainButton;
-    ScopedPointer<TextButton> uxLeftButton2;
-    ScopedPointer<TextButton> uxRightButton2;
     ScopedPointer<MidiKeyboardComponent> midiKeyboard;
+    ScopedPointer<ToggleButton> uxSoloButton;
+    ScopedPointer<ToggleButton> uxMuteButton;
 
 
     //==============================================================================

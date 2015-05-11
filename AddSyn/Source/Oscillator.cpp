@@ -697,18 +697,6 @@ WaveType Oscillator::getWaveType()
 	return wavetype;
 }
 
-SynthesiserSound& Oscillator::getSynthSound()
-{
-	if (wavetype == Sine)
-		return SineWaveSound();
-	else if (wavetype == Square)
-		return SquareWaveSound();
-	else if (wavetype == Triangle)
-		return TriangleWaveSound();
-	else
-		return SawtoothWaveSound();
-}
-
 SynthesiserVoice& Oscillator::getSynthVoice()
 {
 	if (wavetype == Sine)

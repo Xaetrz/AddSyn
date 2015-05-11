@@ -16,6 +16,12 @@
 AddSynAudioProcessor::AddSynAudioProcessor()
 {
 	synth = new AddSynthesizer();
+	muted = new bool[16];
+
+	for (int i = 0; i < 16; i++)
+	{
+		muted[i] = false;
+	}
 }
 
 AddSynAudioProcessor::~AddSynAudioProcessor()
@@ -162,7 +168,7 @@ void AddSynAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 
 	// and now get the synth to process these midi events and generate its output.
 	for (int i = 0; i < 16; i++)
-		if(synth->getActive(i))
+		if(synth->getActive(i) && !muted[i])
 			synth->synth[i].renderNextBlock(buffer, midiMessages, 0, numSamples);
 
     // This is the place where you'd normally do the guts of your plugin's

@@ -63,11 +63,6 @@ bool AudioSignalGenerator::getActive()
 	return isActive;
 }
 
-SynthesiserSound& AudioSignalGenerator::getSynthSound()
-{
-	return oscill->getSynthSound();
-}
-
 SynthesiserVoice& AudioSignalGenerator::getSynthVoice()
 {
 	return oscill->getSynthVoice();
