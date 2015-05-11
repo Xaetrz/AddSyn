@@ -17,7 +17,7 @@ class EnvelopeGenerator;
 class Oscillator
 {
 public:
-	Oscillator(const EnvelopeGenerator* envGen);
+	Oscillator(EnvelopeGenerator* envGen);
 	~Oscillator();
 	void setWaveType(WaveType wt);
 	WaveType getWaveType();

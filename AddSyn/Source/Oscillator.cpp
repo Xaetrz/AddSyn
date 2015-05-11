@@ -16,11 +16,14 @@
 class SineWaveVoice : public SynthesiserVoice
 {
 public:
-	SineWaveVoice(const EnvelopeGenerator* eg)
+	SineWaveVoice(EnvelopeGenerator* eg)
 		: angleDelta(0.0),
 		tailOff(0.0)
 	{
 		envGen = eg;
+		currEnvSection = Attack;
+		sampleCounter = 0;
+		needFinishSustain = false;
 	}
 
 	bool canPlaySound(SynthesiserSound* sound) override
@@ -32,13 +35,17 @@ public:
 		SynthesiserSound* /*sound*/,
 		int /*currentPitchWheelPosition*/) override
 	{
+		currEnvSection = Attack;
 		currentAngle = 0.0;
+		sampleCounter = 0;
 		level = velocity * 0.15;
 		tailOff = 0.0;
+		needFinishSustain = false;
 
 		double cyclesPerSecond = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
 		double cyclesPerSample = cyclesPerSecond / getSampleRate();
 
+		const double attackRate = envGen->getLevels().attackRate;
 		angleDelta = cyclesPerSample * 2.0 * double_Pi;
 	}
 
@@ -49,9 +56,17 @@ public:
 			// start a tail-off by setting this flag. The render callback will pick up on
 			// this and do a fade out, calling clearCurrentNote() when it's finished.
 
-			if (tailOff == 0.0) // we only need to begin a tail-off if it's not already doing so - the
+			if (currEnvSection != Release) // we only need to begin a tail-off if it's not already doing so - the
 				// stopNote method could be called more than once.
-				tailOff = 1.0;
+			{
+				if (envGen->getLevels().isSustain)
+					needFinishSustain = true;
+				else 
+				{
+					currEnvSection = Release;
+					sampleCounter = 0;
+				}
+			}
 		}
 		else
 		{
@@ -59,6 +74,8 @@ public:
 
 			clearCurrentNote();
 			angleDelta = 0.0;
+			currEnvSection = Attack;
+			sampleCounter = 0;
 		}
 	}
 
@@ -76,40 +93,76 @@ public:
 	{
 		if (angleDelta != 0.0)
 		{
-			if (tailOff > 0)
+			if (level > 0)
 			{
 				while (--numSamples >= 0)
 				{
-					const float currentSample = (float)(sin(currentAngle) * level * tailOff);
+
+					// Find where we are in the levels sections and set volume level
+					int currEnvIndex;
+					Levels levels = envGen->getLevels();
+					if (currEnvSection == Attack)
+					{
+						currEnvIndex = (sampleCounter * 1000 * levels.attackRate / getSampleRate());
+						if (currEnvIndex >= 12)
+						{
+							level = levels.sustainValues[0];
+							currEnvSection = Sustain;
+							sampleCounter = 0;
+						}
+						else 
+						{
+							level = levels.attackValues[currEnvIndex];
+						}
+					}
+					else if (currEnvSection == Sustain)
+					{
+						currEnvIndex = (sampleCounter  * 1000 * levels.sustainRate / getSampleRate());
+						if ((!levels.isSustain && currEnvIndex >= 12) || needFinishSustain)
+						{
+							currEnvSection = Release;
+							sampleCounter = 0;
+							level = levels.releaseValues[0];
+						}
+						else 
+						{
+							currEnvIndex %= 12;
+							level = levels.sustainValues[currEnvIndex];
+						}
+					}
+					else  // Release
+					{
+						currEnvIndex = (sampleCounter * 1000 * levels.releaseRate / getSampleRate());
+						if (currEnvIndex >= 12)
+						{
+							level = 0;
+							sampleCounter = 0;
+						}
+						else 
+						{
+							level = levels.releaseValues[currEnvIndex];
+						}
+					}
+					
+
+					const float currentSample = (float)(sin(currentAngle) * level * 0.15);
 
 					for (int i = outputBuffer.getNumChannels(); --i >= 0;)
 						outputBuffer.addSample(i, startSample, currentSample);
 
 					currentAngle += angleDelta;
 					++startSample;
+					++sampleCounter;
 
-					tailOff *= 0.99;
-
-					if (tailOff <= 0.005)
+					if (level == 0)
 					{
 						clearCurrentNote();
 
 						angleDelta = 0.0;
+						currEnvSection = Attack;
+						sampleCounter = 0;
 						break;
 					}
-				}
-			}
-			else
-			{
-				while (--numSamples >= 0)
-				{
-					const float currentSample = (float)(sin(currentAngle) * level);
-
-					for (int i = outputBuffer.getNumChannels(); --i >= 0;)
-						outputBuffer.addSample(i, startSample, currentSample);
-
-					currentAngle += angleDelta;
-					++startSample;
 				}
 			}
 		}
@@ -117,10 +170,13 @@ public:
 
 private:
 	double currentAngle, angleDelta, level, tailOff;
-	const EnvelopeGenerator* envGen;
+	EnvelopeGenerator* envGen;
+	EnvelopeType currEnvSection;
+	int sampleCounter;  // Used for calculating length of envelope sections
+	bool needFinishSustain;
 };
 
-Oscillator::Oscillator(const EnvelopeGenerator* envGen)
+Oscillator::Oscillator(EnvelopeGenerator* envGen)
 {
 	wavetype = Sine;
 	synthVoice = new SineWaveVoice(envGen);

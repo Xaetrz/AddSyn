@@ -30,9 +30,9 @@ struct Levels
 			releaseValues[i] = 5.f;
 		}
 
-		attackRate = 5.f;
-		sustainRate = 5.f;
-		releaseRate = 5.f;
+		attackRate = 0.5f;
+		sustainRate = 0.5f;
+		releaseRate = 0.5f;
 		isSustain = true;
 	}
 };
