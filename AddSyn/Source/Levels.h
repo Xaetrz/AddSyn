@@ -25,9 +25,9 @@ struct Levels
 	{
 		for (int i = 0; i < 12; i++)
 		{
-			attackValues[i] = 5.f;
-			sustainValues[i] = 5.f;
-			releaseValues[i] = 5.f;
+			attackValues[i] = 0.5f;
+			sustainValues[i] = 0.5f;
+			releaseValues[i] = 0.5f;
 		}
 
 		attackRate = 0.5f;

@@ -39,73 +39,73 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     uxTabs->setCurrentTabIndex (0);
 
     addAndMakeVisible (uxSlider1 = new Slider ("uxSlider1"));
-    uxSlider1->setRange (0, 9, 0);
+    uxSlider1->setRange (0, 1, 0);
     uxSlider1->setSliderStyle (Slider::LinearVertical);
     uxSlider1->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider1->addListener (this);
 
     addAndMakeVisible (uxSlider2 = new Slider ("uxSlider2"));
-    uxSlider2->setRange (0, 10, 0);
+    uxSlider2->setRange (0, 1, 0);
     uxSlider2->setSliderStyle (Slider::LinearVertical);
     uxSlider2->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider2->addListener (this);
 
     addAndMakeVisible (uxSlider3 = new Slider ("uxSlider3"));
-    uxSlider3->setRange (0, 10, 0);
+    uxSlider3->setRange (0, 1, 0);
     uxSlider3->setSliderStyle (Slider::LinearVertical);
     uxSlider3->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider3->addListener (this);
 
     addAndMakeVisible (uxSlider4 = new Slider ("uxSlider4"));
-    uxSlider4->setRange (0, 10, 0);
+    uxSlider4->setRange (0, 1, 0);
     uxSlider4->setSliderStyle (Slider::LinearVertical);
     uxSlider4->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider4->addListener (this);
 
     addAndMakeVisible (uxSlider5 = new Slider ("uxSlider5"));
-    uxSlider5->setRange (0, 10, 0);
+    uxSlider5->setRange (0, 1, 0);
     uxSlider5->setSliderStyle (Slider::LinearVertical);
     uxSlider5->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider5->addListener (this);
 
     addAndMakeVisible (uxSlider6 = new Slider ("uxSlider6"));
-    uxSlider6->setRange (0, 10, 0);
+    uxSlider6->setRange (0, 1, 0);
     uxSlider6->setSliderStyle (Slider::LinearVertical);
     uxSlider6->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider6->addListener (this);
 
     addAndMakeVisible (uxSlider7 = new Slider ("uxSlider7"));
-    uxSlider7->setRange (0, 10, 0);
+    uxSlider7->setRange (0, 1, 0);
     uxSlider7->setSliderStyle (Slider::LinearVertical);
     uxSlider7->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider7->addListener (this);
 
     addAndMakeVisible (uxSlider8 = new Slider ("uxSlider8"));
-    uxSlider8->setRange (0, 10, 0);
+    uxSlider8->setRange (0, 1, 0);
     uxSlider8->setSliderStyle (Slider::LinearVertical);
     uxSlider8->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider8->addListener (this);
 
     addAndMakeVisible (uxSlider9 = new Slider ("uxSlider9"));
-    uxSlider9->setRange (0, 10, 0);
+    uxSlider9->setRange (0, 1, 0);
     uxSlider9->setSliderStyle (Slider::LinearVertical);
     uxSlider9->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider9->addListener (this);
 
     addAndMakeVisible (uxSlider10 = new Slider ("uxSlider10"));
-    uxSlider10->setRange (0, 10, 0);
+    uxSlider10->setRange (0, 1, 0);
     uxSlider10->setSliderStyle (Slider::LinearVertical);
     uxSlider10->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider10->addListener (this);
 
     addAndMakeVisible (uxSlider11 = new Slider ("uxSlider11"));
-    uxSlider11->setRange (0, 10, 0);
+    uxSlider11->setRange (0, 1, 0);
     uxSlider11->setSliderStyle (Slider::LinearVertical);
     uxSlider11->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider11->addListener (this);
 
     addAndMakeVisible (uxSlider12 = new Slider ("uxSlider12"));
-    uxSlider12->setRange (0, 10, 0);
+    uxSlider12->setRange (0, 1, 0);
     uxSlider12->setSliderStyle (Slider::LinearVertical);
     uxSlider12->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
     uxSlider12->addListener (this);
@@ -155,15 +155,17 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     uxSawButton->addListener (this);
 
     addAndMakeVisible (uxAttackSlider = new Slider ("uxAttackSlider"));
-    uxAttackSlider->setRange (0, 10, 0);
+    uxAttackSlider->setRange (0, 1, 0);
     uxAttackSlider->setSliderStyle (Slider::RotaryHorizontalDrag);
     uxAttackSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    uxAttackSlider->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
     uxAttackSlider->addListener (this);
 
     addAndMakeVisible (uxReleaseSlider = new Slider ("uxReleaseSlider"));
-    uxReleaseSlider->setRange (0, 10, 0);
+    uxReleaseSlider->setRange (0, 1, 0);
     uxReleaseSlider->setSliderStyle (Slider::RotaryHorizontalDrag);
     uxReleaseSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    uxReleaseSlider->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
     uxReleaseSlider->addListener (this);
 
     addAndMakeVisible (label = new Label ("uxAttackLabel",
@@ -183,9 +185,10 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
     addAndMakeVisible (uxSustainSlider = new Slider ("uxSustainSlider"));
-    uxSustainSlider->setRange (0, 10, 0);
+    uxSustainSlider->setRange (0, 1, 0);
     uxSustainSlider->setSliderStyle (Slider::RotaryHorizontalDrag);
     uxSustainSlider->setTextBoxStyle (Slider::NoTextBox, false, 80, 20);
+    uxSustainSlider->setColour (Slider::rotarySliderFillColourId, Colour (0x7f000000));
     uxSustainSlider->addListener (this);
 
     addAndMakeVisible (label3 = new Label ("uxReleaseLabel",
@@ -216,7 +219,7 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (600, 400);
+    setSize (456, 400);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -275,7 +278,7 @@ void AddSynAudioProcessorEditor::paint (Graphics& g)
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
 
-    g.fillAll (Colour (0xffaea2a2));
+    g.fillAll (Colour (0xff939393));
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -313,9 +316,9 @@ void AddSynAudioProcessorEditor::resized()
     label->setBounds (376, 88, 79, 24);
     label2->setBounds (376, 144, 79, 24);
     uxSustainSlider->setBounds (304, 192, 64, 48);
-    label3->setBounds (376, 200, 79, 24);
+    label3->setBounds (376, 200, 80, 24);
     uxSustainButton->setBounds (344, 248, 64, 24);
-    midiKeyboard->setBounds (16, 320, 432, 64);
+    midiKeyboard->setBounds (0, 320, 456, 80);
     uxSoloButton->setBounds (328, 8, 56, 24);
     uxMuteButton->setBounds (384, 8, 56, 24);
     //[UserResized] Add your own custom resize handling here..
@@ -693,8 +696,8 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public AudioProcessorEditor, public Timer"
                  constructorParams="AddSynAudioProcessor&amp; ownerFilter" variableInitialisers="AudioProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="0" initialWidth="600" initialHeight="400">
-  <BACKGROUND backgroundColour="ffaea2a2"/>
+                 fixedSize="0" initialWidth="456" initialHeight="400">
+  <BACKGROUND backgroundColour="ff939393"/>
   <TABBEDCOMPONENT name="uxTabs" id="2611b740ea85765c" memberName="uxTabs" virtualName=""
                    explicitFocusOrder="0" pos="16 48 288 224" orientation="top"
                    tabBarDepth="30" initialTab="0">
@@ -707,51 +710,51 @@ BEGIN_JUCER_METADATA
   </TABBEDCOMPONENT>
   <SLIDER name="uxSlider1" id="c2f0fd34eb464ed7" memberName="uxSlider1"
           virtualName="" explicitFocusOrder="0" pos="16 88 23 184" min="0"
-          max="9" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider2" id="b623ff4a4fc6be2" memberName="uxSlider2"
           virtualName="" explicitFocusOrder="0" pos="40 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider3" id="9c27aafe20719efc" memberName="uxSlider3"
           virtualName="" explicitFocusOrder="0" pos="64 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider4" id="33ba5a9f81e1224b" memberName="uxSlider4"
           virtualName="" explicitFocusOrder="0" pos="88 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider5" id="b91e3611b5a4511f" memberName="uxSlider5"
           virtualName="" explicitFocusOrder="0" pos="112 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider6" id="17f268caa59ccf84" memberName="uxSlider6"
           virtualName="" explicitFocusOrder="0" pos="136 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider7" id="2d66a2f0787933a6" memberName="uxSlider7"
           virtualName="" explicitFocusOrder="0" pos="160 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider8" id="875f6d0cd9506171" memberName="uxSlider8"
           virtualName="" explicitFocusOrder="0" pos="184 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider9" id="9fdf82fe5c247c77" memberName="uxSlider9"
           virtualName="" explicitFocusOrder="0" pos="208 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider10" id="f5b76a3051889417" memberName="uxSlider10"
           virtualName="" explicitFocusOrder="0" pos="232 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider11" id="d5dbb70ea1b26dda" memberName="uxSlider11"
           virtualName="" explicitFocusOrder="0" pos="256 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxSlider12" id="99d5b5b537f41220" memberName="uxSlider12"
           virtualName="" explicitFocusOrder="0" pos="280 88 23 184" min="0"
-          max="10" int="0" style="LinearVertical" textBoxPos="NoTextBox"
+          max="1" int="0" style="LinearVertical" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <TEXTBUTTON name="uxLeftButton" id="7cea6a0e7fd85c52" memberName="uxLeftButton"
               virtualName="" explicitFocusOrder="0" pos="8 8 31 24" buttonText="&lt;"
@@ -781,12 +784,12 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="248 288 64 24" buttonText="Saw"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
   <SLIDER name="uxAttackSlider" id="2295b727f9479e61" memberName="uxAttackSlider"
-          virtualName="" explicitFocusOrder="0" pos="304 80 64 48" min="0"
-          max="10" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
+          virtualName="" explicitFocusOrder="0" pos="304 80 64 48" rotarysliderfill="7f000000"
+          min="0" max="1" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="uxReleaseSlider" id="cef7c00c399fee98" memberName="uxReleaseSlider"
-          virtualName="" explicitFocusOrder="0" pos="304 136 64 48" min="0"
-          max="10" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
+          virtualName="" explicitFocusOrder="0" pos="304 136 64 48" rotarysliderfill="7f000000"
+          min="0" max="1" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="uxAttackLabel" id="ee617925784fb64d" memberName="label"
          virtualName="" explicitFocusOrder="0" pos="376 88 79 24" edTextCol="ff000000"
@@ -799,11 +802,11 @@ BEGIN_JUCER_METADATA
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <SLIDER name="uxSustainSlider" id="ffee8eede01c4f9e" memberName="uxSustainSlider"
-          virtualName="" explicitFocusOrder="0" pos="304 192 64 48" min="0"
-          max="10" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
+          virtualName="" explicitFocusOrder="0" pos="304 192 64 48" rotarysliderfill="7f000000"
+          min="0" max="1" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="uxReleaseLabel" id="c9461fd4fb8c08" memberName="label3"
-         virtualName="" explicitFocusOrder="0" pos="376 200 79 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="376 200 80 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Sustain Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -811,7 +814,7 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="344 248 64 24" buttonText="Sustain"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
   <GENERICCOMPONENT name="MIDI Keyboard" id="a2d2fd3359bafd05" memberName="midiKeyboard"
-                    virtualName="" explicitFocusOrder="0" pos="16 320 432 64" class="MidiKeyboardComponent"
+                    virtualName="" explicitFocusOrder="0" pos="0 320 456 80" class="MidiKeyboardComponent"
                     params="ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard"/>
   <TOGGLEBUTTON name="uxSoloButton" id="892bd3dd7d282e09" memberName="uxSoloButton"
                 virtualName="" explicitFocusOrder="0" pos="328 8 56 24" buttonText="Solo"
