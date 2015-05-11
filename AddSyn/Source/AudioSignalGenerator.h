@@ -29,6 +29,7 @@ public:
 	const Levels& getLevels();
 	WaveType getWaveType();
 	bool getActive();
+	SynthesiserSound& getSynthSound();
 	SynthesiserVoice& getSynthVoice();
 private:
     Oscillator* oscill;

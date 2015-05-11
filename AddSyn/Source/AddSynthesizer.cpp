@@ -21,6 +21,9 @@ AddSynthesizer::AddSynthesizer()
 	{
 		gens[i].setWaveType(Sine);
 		synth[i].addSound(new SineWaveSound());
+		synth[i].addSound(new TriangleWaveSound());
+		synth[i].addSound(new SquareWaveSound());
+		synth[i].addSound(new SawtoothWaveSound());
 
 		// Five polyphonic sounds per audio signal generator
 		for (int k = 0; k < 5; k++)
@@ -28,9 +31,7 @@ AddSynthesizer::AddSynthesizer()
 	}
 
 	
-	//synth->addSound(new TriangleWaveSound());
-	//synth->addSound(new SquareWaveSound());
-	//synth->addSound(new SawtoothWaveSound());
+	
 }
 
 AddSynthesizer::~AddSynthesizer()
@@ -83,12 +84,13 @@ bool AddSynthesizer::getActive(int instrumentIndex)
 // This will crash if called, cannot figure out why even when using locks
 void AddSynthesizer::ResetSynth()
 {
-	//synth->allNotesOff(0, true);
-	synth->clearVoices();
-
 	for (int i = 0; i < 16; i++)
 	{
+		synth[i].clearVoices();
 		if (gens[i].getActive())
-			synth->addVoice(&gens[i].getSynthVoice());
+		{
+			for (int k = 0; k < 5; k++)
+				synth[i].addVoice(&gens[i].getSynthVoice());
+		}
 	}
 }

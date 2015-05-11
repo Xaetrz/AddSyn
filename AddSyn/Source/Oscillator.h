@@ -21,6 +21,7 @@ public:
 	~Oscillator();
 	void setWaveType(WaveType wt);
 	WaveType getWaveType();
+	SynthesiserSound& getSynthSound();
 	SynthesiserVoice& getSynthVoice();
 private:
 	WaveType wavetype;
