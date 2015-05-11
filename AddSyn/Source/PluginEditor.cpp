@@ -219,7 +219,7 @@ AddSynAudioProcessorEditor::AddSynAudioProcessorEditor (AddSynAudioProcessor& ow
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (456, 400);
+    setSize (472, 400);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -313,12 +313,12 @@ void AddSynAudioProcessorEditor::resized()
     uxSawButton->setBounds (248, 288, 64, 24);
     uxAttackSlider->setBounds (304, 80, 64, 48);
     uxReleaseSlider->setBounds (304, 136, 64, 48);
-    label->setBounds (376, 88, 79, 24);
-    label2->setBounds (376, 144, 79, 24);
+    label->setBounds (376, 88, 80, 24);
+    label2->setBounds (376, 144, 80, 24);
     uxSustainSlider->setBounds (304, 192, 64, 48);
     label3->setBounds (376, 200, 80, 24);
     uxSustainButton->setBounds (344, 248, 64, 24);
-    midiKeyboard->setBounds (0, 320, 456, 80);
+    midiKeyboard->setBounds (0, 320, 472, 80);
     uxSoloButton->setBounds (328, 8, 56, 24);
     uxMuteButton->setBounds (384, 8, 56, 24);
     //[UserResized] Add your own custom resize handling here..
@@ -696,7 +696,7 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public AudioProcessorEditor, public Timer"
                  constructorParams="AddSynAudioProcessor&amp; ownerFilter" variableInitialisers="AudioProcessorEditor(ownerFilter)"
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
-                 fixedSize="0" initialWidth="456" initialHeight="400">
+                 fixedSize="0" initialWidth="472" initialHeight="400">
   <BACKGROUND backgroundColour="ff939393"/>
   <TABBEDCOMPONENT name="uxTabs" id="2611b740ea85765c" memberName="uxTabs" virtualName=""
                    explicitFocusOrder="0" pos="16 48 288 224" orientation="top"
@@ -792,12 +792,12 @@ BEGIN_JUCER_METADATA
           min="0" max="1" int="0" style="RotaryHorizontalDrag" textBoxPos="NoTextBox"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="uxAttackLabel" id="ee617925784fb64d" memberName="label"
-         virtualName="" explicitFocusOrder="0" pos="376 88 79 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="376 88 80 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Attack Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
   <LABEL name="uxReleaseLabel" id="fd9d0e1ffe0c86ea" memberName="label2"
-         virtualName="" explicitFocusOrder="0" pos="376 144 79 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="376 144 80 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Release Rate" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" bold="0" italic="0" justification="33"/>
@@ -814,7 +814,7 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="344 248 64 24" buttonText="Sustain"
                 connectedEdges="0" needsCallback="1" radioGroupId="0" state="1"/>
   <GENERICCOMPONENT name="MIDI Keyboard" id="a2d2fd3359bafd05" memberName="midiKeyboard"
-                    virtualName="" explicitFocusOrder="0" pos="0 320 456 80" class="MidiKeyboardComponent"
+                    virtualName="" explicitFocusOrder="0" pos="0 320 472 80" class="MidiKeyboardComponent"
                     params="ownerFilter.keyboardState, MidiKeyboardComponent::horizontalKeyboard"/>
   <TOGGLEBUTTON name="uxSoloButton" id="892bd3dd7d282e09" memberName="uxSoloButton"
                 virtualName="" explicitFocusOrder="0" pos="328 8 56 24" buttonText="Solo"
