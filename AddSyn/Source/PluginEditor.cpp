@@ -452,7 +452,7 @@ void AddSynAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
 			int currIndex = i % 16;
 			if (!synth.getActive(currIndex))
 			{
-				currPos = i;
+				currPos = currIndex;
 				synth.setActive(currPos, true);
 				break;
 			}

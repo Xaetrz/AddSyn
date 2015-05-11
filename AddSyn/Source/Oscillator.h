@@ -25,6 +25,7 @@ public:
 private:
 	WaveType wavetype;
 	SynthesiserVoice* synthVoice;
+	EnvelopeGenerator* envGen;
 };
 
 #endif  // OSCILLATOR_H_INCLUDED

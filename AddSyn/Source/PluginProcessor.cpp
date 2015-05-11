@@ -161,7 +161,9 @@ void AddSynAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& 
 	keyboardState.processNextMidiBuffer(midiMessages, 0, numSamples, true);
 
 	// and now get the synth to process these midi events and generate its output.
-	synth->synth->renderNextBlock(buffer, midiMessages, 0, numSamples);
+	for (int i = 0; i < 16; i++)
+		if(synth->getActive(i))
+			synth->synth[i].renderNextBlock(buffer, midiMessages, 0, numSamples);
 
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...

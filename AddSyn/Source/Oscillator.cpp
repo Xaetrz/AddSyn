@@ -91,6 +91,7 @@ public:
 
 	void renderNextBlock(AudioSampleBuffer& outputBuffer, int startSample, int numSamples) override
 	{
+		Levels levels = envGen->getLevels();
 		if (angleDelta != 0.0)
 		{
 			if (level > 0)
@@ -100,10 +101,9 @@ public:
 
 					// Find where we are in the levels sections and set volume level
 					int currEnvIndex;
-					Levels levels = envGen->getLevels();
 					if (currEnvSection == Attack)
 					{
-						currEnvIndex = (sampleCounter * 1000 * levels.attackRate / getSampleRate());
+						currEnvIndex = (sampleCounter * 100 * levels.attackRate / getSampleRate());
 						if (currEnvIndex >= 12)
 						{
 							level = levels.sustainValues[0];
@@ -117,7 +117,7 @@ public:
 					}
 					else if (currEnvSection == Sustain)
 					{
-						currEnvIndex = (sampleCounter  * 1000 * levels.sustainRate / getSampleRate());
+						currEnvIndex = (sampleCounter  * 100 * levels.sustainRate / getSampleRate());
 						if ((!levels.isSustain && currEnvIndex >= 12) || needFinishSustain)
 						{
 							currEnvSection = Release;
@@ -132,7 +132,7 @@ public:
 					}
 					else  // Release
 					{
-						currEnvIndex = (sampleCounter * 1000 * levels.releaseRate / getSampleRate());
+						currEnvIndex = (sampleCounter * 100 * levels.releaseRate / getSampleRate());
 						if (currEnvIndex >= 12)
 						{
 							level = 0;
@@ -176,10 +176,11 @@ private:
 	bool needFinishSustain;
 };
 
-Oscillator::Oscillator(EnvelopeGenerator* envGen)
+Oscillator::Oscillator(EnvelopeGenerator* eg)
 {
 	wavetype = Sine;
-	synthVoice = new SineWaveVoice(envGen);
+	envGen = eg;
+	synthVoice = new SineWaveVoice(eg);
 }
 
 Oscillator::~Oscillator()
@@ -201,5 +202,15 @@ WaveType Oscillator::getWaveType()
 
 SynthesiserVoice& Oscillator::getSynthVoice()
 {
+	if (wavetype == Sine)
+		synthVoice = new SineWaveVoice(envGen);
+	//else if (wavetype == Square)
+		//synthVoice = new SquareWaveVoice();
+	//else if (wavetype == Triangle)
+		//synthVoice = new TriangleWaveVoice();
+	//else
+		//synthVoice = new SawtoothWaveVoice();
+
+
 	return *synthVoice;
 }
